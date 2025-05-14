@@ -1,0 +1,3 @@
+function runFunc() {
+    alert("welcome")
+}
