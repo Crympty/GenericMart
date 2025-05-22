@@ -1,15 +1,16 @@
 
 html, body {
     margin: 0;
-    padding: 0
+    padding: 0;
 }
 
 body {
     background-color: #fff4cc;
+    box-sizing: 0;
 }
 
 div.nav-bar {
-    position: sticky;
+    position: fixed;
     align-items: center;
 
     display: flex;
@@ -23,7 +24,6 @@ div.nav-bar {
 
 
 .nav-left, .nav-right {
-    position: sticky;
     font-family: Calibri;
     
     z-index: 1;
@@ -63,9 +63,15 @@ div.nav-bar {
 }
 
 .social-icon {
-    width: clamp(24px, 48px, 96px);
-    aspect-ratio: 1/1
+  display: none;
+}
 
+@media (min-width: 350px) {
+  .social-icon {
+    display: inherit;
+    width: clamp(44px, 5vw, 48px);
+    aspect-ratio: 1/1;
+  }
 }
 
 h1.nav-title {
@@ -73,6 +79,46 @@ h1.nav-title {
     font-size: clamp(24px, 6vw, 34px);
 }
 
-.flex {
-    display:flex;
+#carticon {
+    background-image: url(../assets/carticon.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    background-color: transparent;
+    border-color: transparent;
+    height:48px;
+    width:48px;
+}
+
+#carticon:hover {
+    cursor: pointer;
+}
+
+#sidebar {
+    position: absolute;
+    margin-top: 0;
+    margin-left:0;
+
+    background:rgb(202, 227, 255);
+
+    height: 100vh;    
+
+    border-radius: 0 30px 30px 0;
+}
+
+#sidebar-top {
+    position:absolute;
+    
+    width:inherit;
+    height:50px;
+
+    background:rgb(143, 193, 240);
+    border-radius: 0 30px 0 0;
+
+    z-index:10;
+}
+
+#sidebar-bottom {
+
 }
