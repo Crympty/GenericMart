@@ -7,6 +7,8 @@ html, body {
 body {
     background-color: #fff4cc;
     box-sizing: 0;
+
+    font-family: Calibri;
 }
 
 div.nav-bar {
@@ -19,14 +21,10 @@ div.nav-bar {
     width: 100vw;
     height: clamp(56px, 8vh, 96px);
     background-color: #f3d55d;
+
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+
     z-index: 0;
-}
-
-
-.nav-left, .nav-right {
-    font-family: Calibri;
-    
-    z-index: 1;
 }
 
 .nav-left {
@@ -42,10 +40,6 @@ div.nav-bar {
     align-items: center;
     margin-right: 16px;
     gap: 16px;
-}
-
-.nav-right a {
-    text-decoration-line: none;
 }
 
 .profile {
@@ -66,7 +60,7 @@ div.nav-bar {
   display: none;
 }
 
-@media (min-width: 350px) {
+@media (min-width: 600px) {
   .social-icon {
     display: inherit;
     width: clamp(44px, 5vw, 48px);
@@ -76,7 +70,7 @@ div.nav-bar {
 
 h1.nav-title {
     font-weight: bold;
-    font-size: clamp(24px, 6vw, 34px);
+    font-size: clamp(28px, 6vw, 32px);
 }
 
 #carticon {
@@ -103,6 +97,7 @@ h1.nav-title {
     background:rgb(202, 227, 255);
 
     height: 100vh;    
+    overflow: hidden;
 
     border-radius: 0 30px 30px 0;
 }
