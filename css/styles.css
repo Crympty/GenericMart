@@ -114,6 +114,10 @@ h1.nav-title {
     z-index:10;
 }
 
+#sidebar > * {
+    display: none;
+}
+
 #sidebar-bottom {
 
 }
