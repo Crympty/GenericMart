@@ -1,20 +1,31 @@
 
 
+let sidebarTl = gsap.timeline({paused: true});
+
+sidebarTl.fromTo("#sidebar", { x: "-100%" }, { x: "0%", duration: 0.7, ease: "power2.inOut" }, 0);
+
 let sidebarslid = false;
-let sidebarTl = gsap.timeline(paused(true));
-
-//retract
-sidebarTl.to("#sidebar", {width: "0", duration: 0.7, ease:"power2.in"});
-
-//extend
-sidebarTl.to("#sidebar", {width: "200px", duration: 0.7, ease:"power2.out"});
-sidebarTl.to("#sidebar > *", );
-
-
 document.getElementById("carticon").addEventListener("click", () => {
     if (!sidebarslid) {
         sidebarTl.play();
     } else {
-        sidebarTl.reverse()
+        sidebarTl.reverse();
+    }
+
+    sidebarslid = !sidebarslid;
+});
+
+//clicking off sidebar
+document.addEventListener("click", function (event) {
+    const sidebar = document.getElementById("sidebar");
+    const carticon = document.getElementById("carticon")
+    if (!sidebarslid) {
+        return;
+    }
+    if (!sidebar.contains(event.target) && !carticon.contains(event.target)) {
+        sidebarTl.reverse();
+        sidebarslid = !sidebarslid;
     }
 });
+
+//TODO: add a items count updater for sidebar top
