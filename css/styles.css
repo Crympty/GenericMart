@@ -109,7 +109,7 @@ div.nav-bar {
     background:#3f444c;
 
     height: 100vh;   
-    width: 400px; 
+    width: 450px; 
     overflow: hidden;
 
     border-radius: 0 16px 16px 0;
@@ -157,23 +157,54 @@ div.nav-bar {
     position: relative;
     display: flex;
 
-    justify-content: center;
+    margin-top: 2px;
 
-    margin: 10px;
+    justify-content: left;
 
 }
 
-.cart-item {
-    background-color: #6d7480;
-
+.cart-whole {
     display: flex;
     align-items: center;
 
-    width: calc(100% - 8px);
+    margin: 10px;
+    margin-bottom: 16px;
+
+    width: 100%;
+}
+
+.cart-trash {
+    aspect-ratio: 1/1;
+    width: 48px;
+
+    background: #555a64 url(../assets/trashcan.png) center center / cover no-repeat;
+
+    background-color:#555a64;
+    margin: 8px;
+    margin-right: 0;
+
+    border-style: solid;
+    border-radius: 8px 8px 8px 8px;
+    border-width: 3px;
+    border-color: #454a53;
+}
+
+.cart-trash:hover {
+    cursor: pointer;
+}
+
+
+.cart-item {
+    background-color: #6d7480;
+    display: flex;
+    align-items: center;
+
+    width: calc(100% - 36px);
     height: 80px;
 
     border-radius: 8px 8px 8px 8px;
 }
+
 
 .cart-item img {
     aspect-ratio: 1/1;
@@ -186,6 +217,13 @@ div.nav-bar {
     border-radius: 8px 8px 8px 8px;
     border-width: 3px;
     border-color: #454a53;
+}
+
+.cart-item h2 {
+    margin: 5px;
+
+    color: var(--text-color);
+    font-size: 3rem;
 }
 
 #sidebar-bottom {
