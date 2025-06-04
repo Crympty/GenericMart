@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/util.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/styles.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-    <title>Generic Mart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <title>Generic Mart</title>
 
 </head>
 
@@ -27,25 +28,57 @@
   </div>
 </div>
 
-<div id="sidebar">
+<div id="sidebar" inert>
   <div id="sidebar-top">
     <h1>My Cart</h1>
     <div style="">Items: </div>
     <div></div>
   </div>
   <div id="sidebar-container">
-    <div class="cart-whole">
-      <div class="cart-item">
-        <img src="assets/carrotpng2.png" alt="Carrot">
-        <h2>Carrot</h2>
+    <template id="cart-item-template">
+      <div class="item-group">
+        <div class="item">
+          <img src="assets/carrotpng2.png" alt="Carrot">
+          <h1>Carrot</h1>
+          <hr style="height: 48px; width: 3px; background-color:white">
+          <div class="item-prices">
+            <h2>$3.99</h2>
+          </div>
+        </div>
+        <button class="item-trash" style="right:50px"></button>
       </div>
-      <button class="cart-trash"></button>
+    </template>
+  </div>
+</div>
+
+<div id="listing-container">
+  <div class="listing">
+    <img src="assets\placeholder.svg" class="listing-image">
+    <h1>Placeholder Title</h1>
+    <h2 style="margin-bottom: 4px; font-size: 1.2rem;">"Description text"</h2>
+    <h2 style="margin-bottom: 4px;">$3.99 / lbs</h2>
+    <div class="l-quantity-add">
+      <div class="l-q-container" id="template">
+        <button>
+          <i class="fa fa-minus listing-minus"></i>
+        </button>
+        <input type="text" placeholder="0">
+        <button>
+          <i class="fa fa-plus listing-add"></i>
+        </button>
+      </div>
+      <button class="add-cart-btn">Add <br>to Cart</button>
+
+      </div>
     </div>
 
   </div>
-
-
 </div>
+
+<script>
+
+
+</script>
 
 
 <script src="scripts/main.js"></script>
