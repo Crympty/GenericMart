@@ -44,37 +44,62 @@ document.getElementById("sidebar-container").addEventListener("click", function(
 });
 
 document.getElementById("listing-container").addEventListener("click", function (e) {
-    console.log(e);
     if (e.target.classList.contains("add-cart-btn")) {
-        handleCartAdd();
+        handleCartAdd(e.target);
     }
-    if (e.target.classList.contains("l-q-container")) {
-        if (e.target.classList.contains("listing-add")) {
-            handleQuantityChange(true, e);
-        }
-        if (e.target.classList.contains("listing-minus")) {
-            handleQuantityChange(false, e);
-        }
+
+    if (e.target.classList.contains("listing-add")) {
+        handleQuantityChange(true, e.target);
     }
+    if (e.target.classList.contains("listing-minus")) {
+        handleQuantityChange(false, e.target);
+    }
+
 })
 
 
-function handleCartAdd(event) {
+document.getElementById("listing-container").addEventListener("input", function(e) {
+    const input = e.target;
+
+    if (input.classList.contains("q-input")) {
+        input.value = input.value.replace(/[^0-9]/g, "")
+    };
+    quantityRestraint(input);
+});
+
+function handleCartAdd(target) {
+
+    const listing = target.closest(".listing");
+    addCart();
+
+    function addCart() {
+        const template = document.getElementById("cart-item-template");
+        const clone = template.content.cloneNode(true);
+        let newItem = clone.querySelector(".item-group");
+
+        newItem.id = `cart-item${itemCount}`
+        itemCount++;
+
+        document.getElementById("sidebar-container").appendChild(clone);
+    }
 
 }
 
-function addItem() {
-    const template = document.getElementById("cart-item-template");
-    const clone = template.content.cloneNode(true);
-    let newItem = clone.querySelector(".item-group");
+function handleQuantityChange(isIncrease, target) {
+    const input = target.closest(".l-q-container").querySelector(".q-input");
 
-    newItem.id = `cart-item${itemCount}`
-    itemCount++;
-
-    console.log(clone);
-    document.getElementById("sidebar-container").appendChild(clone);
+    if (isIncrease) {
+        input.value = parseInt(input.value || "1") + 1;
+    } else {
+        input.value = parseInt(input.value || "1") - 1;
+    }
+    quantityRestraint(input);
 }
 
-function handleQuantityChange(isIncrease, event) {
-
+function quantityRestraint(input) {
+    if (input.value > 99) {
+        input.value = 99;
+    } else if (input.value < 1) {
+        input.value = 1;
+    }
 }
