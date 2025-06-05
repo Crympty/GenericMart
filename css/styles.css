@@ -170,6 +170,7 @@ body {
 .item-group {
     display: flex;
     align-items: center;
+    overflow: none;
 
     gap: 8px;
 

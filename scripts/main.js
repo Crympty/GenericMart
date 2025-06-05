@@ -103,3 +103,11 @@ function quantityRestraint(input) {
         input.value = 1;
     }
 }
+
+function itemNameRestraint(element, container, clip = {minRem: 0.5, increment: 0.1}) {
+    
+    const rootPx = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    let elementPx = parseFloat(getComputedStyle(element).fontSize);
+    let curRem = elementPx / rootPx;
+
+}
