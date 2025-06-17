@@ -31,20 +31,19 @@
 <div id="sidebar" inert>
   <div id="sidebar-top">
     <h1>My Cart</h1>
-    <div style="">Items: </div>
-    <div></div>
+    <h2 id="cart-count">Items: 0</h2>
   </div>
   <div id="sidebar-container">
     <template id="cart-item-template">
       <div class="item-group">
         <div class="item">
-          <div class="l-hr">
-            <img src="assets/placeholder.svg" alt="Carrot">
+          <img src="assets/placeholder.svg" alt="Placeholder">
+          <div class="l-hr" style="width: 170px">
             <h1>Placeholder</h1>  
           </div>
-          <hr style="height: 48px; width: 3px; background-color:white">
-          <div class="r-hr">
-            <div class="item-prices">
+          <hr>
+          <div class="r-hr" style="margin-left: 16px;">
+            <div class="item-p-q">
               <h2>$3.99</h2>
             </div>
           </div>
@@ -56,28 +55,29 @@
 </div>
 
 <div id="listing-container">
-  <div class="listing">
-    <img src="assets\placeholder.svg" class="listing-image">
-    <h1>Placeholder Title</h1>
-    <h2 style="margin-bottom: 4px; font-size: 1.2rem;">"Description text"</h2>
-    <h2 style="margin-bottom: 4px;">$3.99 / lbs</h2>
-    <div class="l-quantity-add">
-      <div class="l-q-container" id="template">
-        <button>
-          <i class="fa fa-minus listing-minus"></i>
-        </button>
-        <input class="q-input" type="text" placeholder="1" inputmode="numeric" pattern="[0-9]*">
-        <button>
-          <i class="fa fa-plus listing-add"></i>
-        </button>
-      </div>
-      <button class="add-cart-btn">Add <br>to Cart</button>
+  <template id="listing-template">
+    <div class="listing">
+      <img src="assets\placeholder.svg" class="listing-image">
+      <h1 style="display: flex; justify-content: center; width: inherit;height:40px;">Placeholder Title</h1>
+      <h2 class="description" style="display: flex; justify-content: center; margin-bottom: 4px; font-size: 1.2rem; width: inherit; height:25px; text-align: center;">"Description text"</h2>
+      <h2 class="p-q" style=" margin-bottom: 4px; display: flex; width: 100%;height: 30px; justify-content: center;">$3.99 / lbs</h2>
+      <div class="l-quantity-add">
+        <div class="l-q-container" id="template">
+          <button>
+            <i class="fa fa-minus listing-minus"></i>
+          </button>
+          <input class="q-input" type="text" placeholder="1" inputmode="numeric" pattern="[0-9]*">
+          <button>
+            <i class="fa fa-plus listing-add"></i>
+          </button>
+        </div>
+        <button class="add-cart-btn">Add <br>to Cart</button>
 
       </div>
     </div>
-
-  </div>
+  </template>
 </div>
+
 
 <script>
 

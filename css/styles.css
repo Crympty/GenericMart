@@ -145,7 +145,7 @@ body {
     z-index: 2;
 }
 
-#sidebar-top div {
+#sidebar-top h2 {
     position: absolute;
     color: #d0d5dc8a;
 
@@ -236,15 +236,20 @@ body {
 .item hr {
     position: absolute;
     right: 100px;
+    height: 48px; 
+    width: 3px; 
+    background-color:white
 }
 
-.item-prices {
+.item-p-q {
     margin: 7.5px;
     margin-left: auto;
+    display: flex;
+    flex-direction: column;
 
 }
 
-.item-prices h2 {
+.item-p-q h2 {
 
     color: var(--text-color);
     font-size: 2rem;

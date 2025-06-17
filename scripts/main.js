@@ -2,7 +2,15 @@
 
 let sidebarTl = gsap.timeline({paused: true});
 let sidebarslid = false;
-let itemCount = 1;
+let itemIdCount = 1;
+let cartCount = 0;
+
+//key: name, value: # of item
+const itemCountMap = new Map([
+    ["PLACEHOLDER", 0],
+]);
+
+init();
 
 sidebarTl.fromTo("#sidebar", { x: "-100%" }, { x: "0%", duration: 0.7, ease: "power2.inOut" }, 0);
 
@@ -27,19 +35,18 @@ document.addEventListener("click", function (event) {
     }
     if (!sidebar.contains(event.target) && !carticon.contains(event.target)) {
         sidebarTl.reverse();
-        siderbar.setAttribute("inert", "");
+        sidebar.setAttribute("inert", "");
         sidebarslid = !sidebarslid;
     }
 });
 
-//TODO: add a items count updater for sidebar top
-
 document.getElementById("sidebar-container").addEventListener("click", function(e) {
     if (e.target.classList.contains("item-trash")) {
         const itemG = e.target.closest(".item-group")
-        //TODO: impl change cart total
 
         itemG.remove();
+        cartCount--;
+        updateCartTotalCount();
     }
 });
 
@@ -67,24 +74,42 @@ document.getElementById("listing-container").addEventListener("input", function(
     quantityRestraint(input);
 });
 
+//handler: adding an item to sidebar using "Add To Cart"
 function handleCartAdd(target) {
 
     const listing = target.closest(".listing");
     addCart();
 
-    function addCart() {
+    function addCart(name) {
         const template = document.getElementById("cart-item-template");
         const clone = template.content.cloneNode(true);
-        let newItem = clone.querySelector(".item-group");
+        let item = clone.querySelector(".item-group");
 
-        newItem.id = `cart-item${itemCount}`
-        itemCount++;
+        item.id = name + "-cart";
+
+        //TODO: get amount in q-input, check for default null, if so increase cartCount by 1
+        // cartCount +=;
+        updateCartTotalCount();
+
+        //child properties
+        let iName = item.querySelector("h1");
+        let lHr = item.querySelector(".l-hr");
+        let img = item.querySelector("img");
 
         document.getElementById("sidebar-container").appendChild(clone);
+ 
+        textRestraint(iName, lHr)
     }
 
 }
 
+//util func: increasing sidebar's total item count
+function updateCartTotalCount(amount) {
+        let h2 = document.getElementById("cart-count");
+        h2.textContent = "Items: " + cartCount;
+}
+
+//util: increase/decrease button on item listing
 function handleQuantityChange(isIncrease, target) {
     const input = target.closest(".l-q-container").querySelector(".q-input");
 
@@ -95,7 +120,7 @@ function handleQuantityChange(isIncrease, target) {
     }
     quantityRestraint(input);
 }
-
+//util: restrain increase/decrease on item listing to 1-99
 function quantityRestraint(input) {
     if (input.value > 99) {
         input.value = 99;
@@ -103,11 +128,47 @@ function quantityRestraint(input) {
         input.value = 1;
     }
 }
-
-function itemNameRestraint(element, container, clip = {minRem: 0.5, increment: 0.1}) {
-    
+//util: restraining font size depending on container & content
+function textRestraint(text, container, clip = {minRem: 0.1, increment: 0.1}) {
     const rootPx = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    let elementPx = parseFloat(getComputedStyle(element).fontSize);
+    let elementPx = parseFloat(getComputedStyle(text).fontSize);
     let curRem = elementPx / rootPx;
 
+    while ((text.scrollWidth > container.clientWidth || text.scrollHeight > container.clientHeight) && curRem > clip.minRem) {
+        curRem -= clip.increment;
+        text.style.fontSize = curRem + "rem";
+    }
+}
+
+//NOTE: name & id are the same 
+function createItem(name, img, desc, price, measurement) {
+    const template = document.getElementById("listing-template");
+    const clone = template.content.cloneNode(true);
+
+    let listing = clone.querySelector(".listing");
+    listing.id = name;
+
+    let image = listing.querySelector("img");
+    let h1 = listing.querySelector("h1");    
+    let descr = listing.querySelector(".description");
+    let pq = listing.querySelector(".p-q");
+
+    h1.textContent = name;
+    image.src = img;
+    descr.textContent = desc;
+
+    let concatStr = "$" + price + " / " + measurement;
+    pq.textContent = concatStr;
+
+    document.getElementById("listing-container").appendChild(clone);
+
+    let elements = listing.querySelectorAll("h1, .description, .p-q");
+    elements.forEach(elem => {textRestraint(elem, elem, {minRem: 0.8, increment: 0.1})});
+}
+
+//called when script loaded
+//TODO: maybe add impl where it reads json file instead of fuckshit spamming creatitem? just a thought
+function init() {
+    createItem("Carrot", "../assets/carrotpng2.png", "Bunnies love em'", 3.99, "pc");
+    
 }
