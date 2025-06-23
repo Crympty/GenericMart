@@ -77,28 +77,45 @@ document.getElementById("listing-container").addEventListener("input", function(
 //handler: adding an item to sidebar using "Add To Cart"
 function handleCartAdd(target) {
 
-    const listing = target.closest(".listing");
+    const selListing = target.closest(".listing");
+    let allList = document.getElementById("listing-container").querySelectorAll(".item-group");
     addCart();
 
-    function addCart(name) {
+    function addCart() {
+        //TODO: impl check existing id in cart
+
         const template = document.getElementById("cart-item-template");
         const clone = template.content.cloneNode(true);
         let item = clone.querySelector(".item-group");
 
-        item.id = name + "-cart";
+        allList.forEach((value, ind) => {
+            
+        });
 
-        //TODO: get amount in q-input, check for default null, if so increase cartCount by 1
-        // cartCount +=;
+        let name = selListing.querySelector("h1").textContent;
+        let pm = selListing.querySelector(".p-q").textContent;
+        let price = parseFloat(pm.substring(1, pm.indexOf(" ")));
+        let quantity = parseFloat(selListing.querySelector(".q-input").value || "1")
+        let tp = price * quantity;
+
+        item.id = name.toLowerCase() + "-cart";
+
+        cartCount += quantity;
         updateCartTotalCount();
+
+        let lImg = selListing.querySelector("img");
 
         //child properties
         let iName = item.querySelector("h1");
-        let lHr = item.querySelector(".l-hr");
-        let img = item.querySelector("img");
+        let ilHr = item.querySelector(".l-hr");
+        let iImg = item.querySelector("img");
+
+        iName.textContent = name + " " + pm.substring(pm.indexOf("/"));
+        iImg.src = lImg.src;
 
         document.getElementById("sidebar-container").appendChild(clone);
  
-        textRestraint(iName, lHr)
+        textRestraint(iName, ilHr)
     }
 
 }
@@ -110,6 +127,7 @@ function updateCartTotalCount(amount) {
 }
 
 //util: increase/decrease button on item listing
+//learning note: .value instead of .textContent because .value is used for user inputs, not whats inside html's <>
 function handleQuantityChange(isIncrease, target) {
     const input = target.closest(".l-q-container").querySelector(".q-input");
 
